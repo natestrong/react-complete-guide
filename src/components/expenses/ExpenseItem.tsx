@@ -1,7 +1,8 @@
 import './ExpenseItems.css';
 import ExpenseDate from './ExpenseDate';
 import {ExpenseProps} from './Expenses';
-import Card from './Card';
+import Card from '../UI/Card';
+import React from 'react';
 
 function localizeCurrency(value: number) {
     const formatter = new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'});

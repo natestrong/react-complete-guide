@@ -1,6 +1,6 @@
-import './Expenses.css'
+import './Expenses.css';
 import ExpenseItem from './ExpenseItem';
-import Card from './Card';
+import Card from '../UI/Card';
 
 interface ExpenseList {
     expenseList: ExpenseProps[];
@@ -14,9 +14,13 @@ export interface ExpenseProps {
 
 function Expenses({expenseList}: ExpenseList) {
     return (
-        <Card className="expenses">
+        <Card className='expenses'>
             {expenseList.map(expense =>
-                <ExpenseItem key={`${expense.date.toString()}-${expense.title}`} {...expense}/>)}
+                <ExpenseItem
+                    key={`${expense.date.toString()}-${expense.title}`}
+                    {...expense}
+                />)
+            }
         </Card>
     );
 }

@@ -1,22 +1,28 @@
 import './ExpenseForm.css';
-import {SyntheticEvent, useState} from 'react';
+import {PropsWithChildren, SyntheticEvent, useState} from 'react';
 
-export interface INewExpenseForm {
+export interface IExpenseData {
     title: string;
     dateString: string;
     date: Date;
     amount: number;
+    id: string;
 }
 
-const initialFormData = {
-    title: '',
-    date: new Date(),
-    dateString: new Date().toISOString().split('T')[0],
-    amount: 0
+function formReset(): IExpenseData {
+    const now = new Date();
+
+    return ({
+        title: '',
+        date: now,
+        dateString: now.toISOString().split('T')[0],
+        amount: 0,
+        id: Math.random().toString()
+    });
 }
 
-function ExpenseForm() {
-    const [userInput, setUserInput] = useState<INewExpenseForm>({...initialFormData});
+function ExpenseForm({onSaveExpenseData}: PropsWithChildren<any>) {
+    const [userInput, setUserInput] = useState<IExpenseData>(formReset());
 
     function titleChangeHandler(e: SyntheticEvent<HTMLInputElement>) {
         const title = (e.target as HTMLInputElement).value;
@@ -39,10 +45,11 @@ function ExpenseForm() {
 
     function submitHandler(e: SyntheticEvent<HTMLFormElement>) {
         e.preventDefault();
-
         console.log(userInput);
+        console.log(onSaveExpenseData);
+        onSaveExpenseData(userInput);
 
-        setUserInput({...initialFormData});
+        setUserInput(formReset());
     }
 
     return (

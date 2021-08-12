@@ -1,17 +1,18 @@
 import Expenses from './components/expenses/Expenses';
 import NewExpense from './components/NewExpense/NewExpense';
+import {IExpenseData} from './components/NewExpense/ExpenseForm';
+import {useState} from 'react';
 
 function App() {
-    const expenses = [
-        {title: 'Car Insurance', amount: 295.65, date: new Date(2021, 8, 10)},
-        {title: 'Cat Food', amount: 45, date: new Date(2021, 8, 9)},
-        {title: 'Gold Grill', amount: 1800, date: new Date(2021, 8, 9)},
-        {title: 'Gold Chain', amount: 967, date: new Date(2021, 7, 27)},
-    ];
+    const [expenses, setExpenses] = useState<IExpenseData[]>([]);
+
+    function saveExpenseDataHandler(expenseData: IExpenseData) {
+        setExpenses((prevState) => [...prevState, expenseData]);
+    }
 
     return (
         <div>
-            <NewExpense/>
+            <NewExpense saveExpenseDataHandler={saveExpenseDataHandler}/>
             <Expenses expenseList={expenses}/>
         </div>
     );

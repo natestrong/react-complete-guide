@@ -8,13 +8,15 @@ export interface INewExpenseForm {
     amount: number;
 }
 
+const initialFormData = {
+    title: '',
+    date: new Date(),
+    dateString: new Date().toISOString().split('T')[0],
+    amount: 0
+}
+
 function ExpenseForm() {
-    const [userInput, setUserInput] = useState<INewExpenseForm>({
-        title: '',
-        date: new Date(),
-        dateString: new Date().toISOString().split('T')[0],
-        amount: 0
-    });
+    const [userInput, setUserInput] = useState<INewExpenseForm>({...initialFormData});
 
     function titleChangeHandler(e: SyntheticEvent<HTMLInputElement>) {
         const title = (e.target as HTMLInputElement).value;
@@ -39,6 +41,8 @@ function ExpenseForm() {
         e.preventDefault();
 
         console.log(userInput);
+
+        setUserInput({...initialFormData});
     }
 
     return (

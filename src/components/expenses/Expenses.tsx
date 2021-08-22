@@ -1,27 +1,38 @@
 import './Expenses.css';
 import ExpenseItem from './ExpenseItem';
 import Card from '../UI/Card';
+import ExpensesFilter from './ExpensesFilter';
+import {useState} from 'react';
 
-interface ExpenseList {
-    expenseList: ExpenseProps[];
+export interface ExpenseList {
+    expenseList: IExpense[];
 }
 
-export interface ExpenseProps {
+export interface IExpense {
     title: string,
     date: Date,
     amount: number,
 }
 
 function Expenses({expenseList}: ExpenseList) {
+    const [yearFilter, setYearFilter] = useState(new Date().getFullYear());
+
+    const filterChangeHandler = (selectedYear: number) => {
+        setYearFilter(selectedYear);
+    };
+
     return (
-        <Card className='expenses'>
-            {expenseList.map(expense =>
-                <ExpenseItem
-                    key={`${expense.date.toString()}-${expense.title}`}
-                    {...expense}
-                />)
-            }
-        </Card>
+        <div>
+            <Card className='expenses'>
+                <ExpensesFilter onChangeFilter={filterChangeHandler} yearFilter={yearFilter}/>
+                {expenseList.map(expense =>
+                    <ExpenseItem
+                        key={`${expense.date.toString()}-${expense.title}`}
+                        {...expense}
+                    />)
+                }
+            </Card>
+        </div>
     );
 }
 

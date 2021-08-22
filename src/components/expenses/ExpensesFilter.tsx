@@ -3,7 +3,7 @@ import './ExpensesFilter.css';
 
 interface ExpensesFilterProps {
     onChangeFilter: Function;
-    yearFilter: number;
+    yearFilter: string;
 }
 
 const ExpensesFilter = ({onChangeFilter, yearFilter}: ExpensesFilterProps) => {

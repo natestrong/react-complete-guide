@@ -15,17 +15,26 @@ export interface IExpense {
 }
 
 function Expenses({expenseList}: ExpenseList) {
-    const [yearFilter, setYearFilter] = useState(new Date().getFullYear());
+    const [filteredExpenses, setFilteredExpenses] = useState(expenseList);
+    const [yearFilter, setYearFilter] = useState(new Date().getFullYear().toString());
 
-    const filterChangeHandler = (selectedYear: number) => {
+    const filterChangeHandler = (selectedYear: string) => {
         setYearFilter(selectedYear);
+        console.log(selectedYear);
+        const filtered = expenseList.filter(expense => {
+            console.log(expense.date.getFullYear());
+            return expense.date.getFullYear().toString() === selectedYear;
+        });
+        console.log(filtered);
+        setFilteredExpenses(filtered);
     };
 
     return (
         <div>
             <Card className='expenses'>
-                <ExpensesFilter onChangeFilter={filterChangeHandler} yearFilter={yearFilter}/>
-                {expenseList.map(expense =>
+                <ExpensesFilter onChangeFilter={filterChangeHandler}
+                                yearFilter={yearFilter}/>
+                {filteredExpenses.map(expense =>
                     <ExpenseItem
                         key={`${expense.date.toString()}-${expense.title}`}
                         {...expense}

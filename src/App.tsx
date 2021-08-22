@@ -8,7 +8,7 @@ function App() {
     const [expenses, setExpenses] = useState<IExpenseData[]>(initialExpenses);
 
     function saveExpenseDataHandler(expenseData: IExpenseData) {
-        setExpenses((prevState) => [...prevState, expenseData]);
+        setExpenses((prevState) => [expenseData, ...prevState]);
     }
 
     return (

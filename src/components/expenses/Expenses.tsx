@@ -4,6 +4,7 @@ import Card from '../UI/Card';
 import ExpensesFilter from './ExpensesFilter';
 import {useState} from 'react';
 import {IExpenseList} from '../NewExpense/ExpenseForm';
+import ExpensesList from './ExpensesList';
 
 
 function Expenses({expenseList}: IExpenseList) {
@@ -15,24 +16,14 @@ function Expenses({expenseList}: IExpenseList) {
 
     const filteredExpenses = expenseList.filter(expense => expense.date.getFullYear().toString() === yearFilter);
 
-    let expensesContent: JSX.Element = <p>No expenses found</p>;
-    if (filteredExpenses.length) {
-        expensesContent = <> {
-            filteredExpenses.map(expense =>
-                <ExpenseItem
-                    key={`${expense.date.toString()}-${expense.title}`}
-                    {...expense}
-                />)
-        }
-        </>;
-    }
-
     return (
         <div>
             <Card className='expenses'>
                 <ExpensesFilter onChangeFilter={filterChangeHandler}
                                 yearFilter={yearFilter}/>
-                {expensesContent}
+
+                <ExpensesList items={filteredExpenses}/>
+
             </Card>
         </div>
     );

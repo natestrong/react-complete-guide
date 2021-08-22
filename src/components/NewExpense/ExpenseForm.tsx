@@ -25,7 +25,7 @@ function formReset(): IExpenseData {
     });
 }
 
-function ExpenseForm({onSaveExpenseData}: PropsWithChildren<any>) {
+function ExpenseForm({onSaveExpenseData, onCloseForm}: PropsWithChildren<any>) {
     const [userInput, setUserInput] = useState<IExpenseData>(formReset());
 
     function titleChangeHandler(e: SyntheticEvent<HTMLInputElement>) {
@@ -49,11 +49,9 @@ function ExpenseForm({onSaveExpenseData}: PropsWithChildren<any>) {
 
     function submitHandler(e: SyntheticEvent<HTMLFormElement>) {
         e.preventDefault();
-        console.log(userInput);
-        console.log(onSaveExpenseData);
         onSaveExpenseData(userInput);
-
         setUserInput(formReset());
+        onCloseForm();
     }
 
     return (
@@ -86,6 +84,7 @@ function ExpenseForm({onSaveExpenseData}: PropsWithChildren<any>) {
                 </div>
             </div>
             <div className='new-expense__actions'>
+                <button onClick={onCloseForm}>Cancel</button>
                 <button type='submit'>Add Expense</button>
             </div>
         </form>

@@ -1,14 +1,14 @@
 import './ExpenseItems.css';
 import ExpenseDate from './ExpenseDate';
-import {IExpense} from './Expenses';
 import Card from '../UI/Card';
+import {IExpenseData} from '../NewExpense/ExpenseForm';
 
 function localizeCurrency(value: number) {
     const formatter = new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'});
     return formatter.format(value);
 }
 
-function ExpenseItem({date, amount, ...props}: IExpense) {
+function ExpenseItem({date, amount, ...props}: IExpenseData) {
     return (
         <Card className='expense-item'>
             <ExpenseDate date={date}/>

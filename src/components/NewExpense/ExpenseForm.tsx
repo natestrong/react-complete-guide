@@ -1,6 +1,10 @@
 import './ExpenseForm.css';
 import {PropsWithChildren, SyntheticEvent, useState} from 'react';
 
+export interface IExpenseList {
+    expenseList: IExpenseData[]
+}
+
 export interface IExpenseData {
     title: string;
     dateString: string;

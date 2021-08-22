@@ -1,10 +1,10 @@
 import './Expenses.css';
-import ExpenseItem from './ExpenseItem';
 import Card from '../UI/Card';
 import ExpensesFilter from './ExpensesFilter';
 import {useState} from 'react';
 import {IExpenseList} from '../NewExpense/ExpenseForm';
 import ExpensesList from './ExpensesList';
+import ExpensesChart from './ExpensesChart';
 
 
 function Expenses({expenseList}: IExpenseList) {
@@ -21,6 +21,8 @@ function Expenses({expenseList}: IExpenseList) {
             <Card className='expenses'>
                 <ExpensesFilter onChangeFilter={filterChangeHandler}
                                 yearFilter={yearFilter}/>
+
+                <ExpensesChart expenses={filteredExpenses}/>
 
                 <ExpensesList items={filteredExpenses}/>
 
